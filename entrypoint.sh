@@ -22,7 +22,7 @@ if ! grep -q "APP_KEY=base64" .env; then
 fi
 
 if [ ! -f "database/database.sqlite" ]; then
-    echo "🗃️ Creating SQLite database..."
+    echo "Creating SQLite database..."
     touch database/database.sqlite
 fi
 
@@ -33,8 +33,8 @@ else
     echo " SQLite DB exists, skipping migrations."
 fi
 
-echo "Fixing permissions..."
-chmod -R 775 storage bootstrap/cache || true
+echo "Fixing permissions (setting 777 - USE WITH CAUTION IN PRODUCTION!)..."
+chmod -R 777 storage bootstrap/cache || true
 
 echo " Starting Apache..."
 exec apache2-foreground
